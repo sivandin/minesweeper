@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body onload="onInit()">
+    <h1>Mine Sweeper</h1>
+    <div class ="game-status"> 
+        <span class="flags-left"></span>
+        <button onclick="onInit()" class="restart">&#128522</button>
+        <span class="timer">0</span>
+    </div>
+    <div class="diff-level">
+        <button data-diff="easy" onclick="diffLevel(this)">Easy</button>
+        <button data-diff="medium" onclick="diffLevel(this)">Medium</button>
+        <button data-diff="hard" onclick="diffLevel(this)">Hard</button>
+    </div>
+    <div class="board-container"></div>
+    <script src="js/game.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/functionality.js"></script>
+</body>
+
+</html>
