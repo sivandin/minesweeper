@@ -2,6 +2,10 @@
 var gStartTime
 var gTimerInterval
 
+const easyBtn = document.querySelector('.diff-level button[data-diff="easy"]')
+var previuosSelectnBtn= easyBtn
+
+
 function startTimer () {
     gStartTime=Date.now()
     gTimerInterval=setInterval(updateTime,1000)
@@ -23,9 +27,8 @@ function updateTime() {
     const elTimer=document.querySelector('.timer')
     elTimer.innerHTML=seconds
 }
-var previuosSelectnBtn= null
 
-function diffLevel(elBtn) {
+function chooseDiffLevel(elBtn) {
     //debugger
 
     
@@ -38,14 +41,17 @@ function diffLevel(elBtn) {
         case 'easy':
             gLevel.SIZE = 4;
             gLevel.MINES = 2;
+            gLevel.LIVES = 1;
             break;
         case 'medium':
             gLevel.SIZE = 8;
             gLevel.MINES = 14;
+            gLevel.LIVES = 3;
             break;
         case 'hard':
             gLevel.SIZE = 12;
             gLevel.MINES = 32;
+            gLevel.LIVES = 3;
             break;
         default:
             // Handle other cases or provide a default value

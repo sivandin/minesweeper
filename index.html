@@ -5,22 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Doodle+Shadow">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Concert+One">
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
+
     <title>Document</title>
 </head>
 
 <body onload="onInit()">
     <h1>Mine Sweeper</h1>
-    <div class ="game-status"> 
-        <span class="flags-left"></span>
-        <button onclick="onInit()" class="restart">&#128522</button>
-        <span class="timer">0</span>
-    </div>
+    <div class="img-container"></div>
     <div class="diff-level">
-        <button data-diff="easy" onclick="diffLevel(this)">Easy</button>
-        <button data-diff="medium" onclick="diffLevel(this)">Medium</button>
-        <button data-diff="hard" onclick="diffLevel(this)">Hard</button>
+        <button data-diff="easy" class="clicked" onclick="chooseDiffLevel(this)">Easy</button>
+        <button data-diff="medium" onclick="chooseDiffLevel(this)">Medium</button>
+        <button data-diff="hard" onclick="chooseDiffLevel(this)">Hard</button>
+    </div>
+    <div class="game-status">
+        <span class="lives"></span>
+        <button onclick="onInit()" class="restart">&#128522</button>
+        <span class="flags-left"></span>
+        <span>
+            <img width="40" src="../img/flag.png"/>
+        </span>
     </div>
     <div class="board-container"></div>
+    <div class="game-status">
+        <span class="timer">0</span>
+    </div>
     <script src="js/game.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/functionality.js"></script>
