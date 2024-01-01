@@ -4,8 +4,8 @@ const MINE = '*'
 const EMPTY = ' '
 const FLAG = '<|'
 
-const FLAG_IMG = '<img src="../img/flag.png" class="img">'
-const MINE_IMG = '<img src="../img/mine.png" class="img">'
+const FLAG_IMG = '<img src="img/flag.png" class="img">'
+const MINE_IMG = '<img src="img/mine.png" class="img">'
 
 
 
