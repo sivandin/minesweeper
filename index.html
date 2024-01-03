@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik+Doodle+Shadow">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Concert+One">
-
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Tangerine:wght@700&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 
@@ -25,19 +25,35 @@
     </div>
     <div class="game-status">
         <span class="lives"></span>
-        <button onclick="onInit()" class="restart">&#128522</button>
+        <button data-diff="restart" onclick="chooseDiffLevel(this); onInit()">&#128522</button>
         <span class="flags-left"></span>
-        <span>
-            <img width="40" src="img/flag.png"/>
-        </span>
+        <span><img width="40" src="img/flag.png" /></span>
+    </div>
+    <div class="board-container-and-hints">
+        <div class="board-container"></div>
+        <div class="hints">
+            <button class="hints" onclick="onHintClick(this)">
+                <span><img width="40" src="img/flashlight.png" /></span>
+            </button>
+            <button class="hints" onclick="onHintClick(this)">
+                <span><img width="40" src="img/flashlight.png" /></span>
+            </button>
+            <button class="hints" onclick="onHintClick(this)">
+                <span><img width="40" src="img/flashlight.png" /></span>
+            </button>
+        </div>
     </div>
     <div class="board-container"></div>
     <div class="game-status">
         <span class="timer">0</span>
     </div>
+    <div class="tableScore"></div>
     <script src="js/game.js"></script>
     <script src="js/utils.js"></script>
-    <script src="js/functionality.js"></script>
+    <script src="js/timeAndDiff.js"></script>
+    <script src="js/hints.js"></script>
+    <script src="js/tableScore.js"></script>
+
 </body>
 
 </html>

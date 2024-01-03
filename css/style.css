@@ -13,49 +13,6 @@ h1 {
     margin-bottom: 10px;
 }
 
-
-.game-status {
-    justify-content: space-between;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 40px;
-    font-family: 'Concert One';
-    display: inline-block;
-    font-weight: bold;
-     color: #d6d6d6; /* Text color */
-     -webkit-text-stroke: 2px rgb(39, 39, 39); 
-}
-
-.lives {
-    margin-right: 35px;
-}
-
-
-.restart {
-
-    text-align: center;
-    font-size: 40px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    margin-bottom: 10px;
-    margin-right: 35px;
-    
-}
-
-.flags-left {
-    font-size: 50px;
-
-}
-
-.timer {
-   
-    font-size: 60px;
-      /* WebKit browsers (Chrome, Safari) */
-    
-}
-
-
 .diff-level button {
     padding: 10px;
     background-color: transparent;
@@ -76,14 +33,98 @@ h1 {
 }
 
 
-table {
+.game-status {
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 40px;
+    font-family: 'Concert One';
+    display: inline-block;
+    font-weight: bold;
+     color: #d6d6d6; /* Text color */
+     -webkit-text-stroke: 2px rgb(39, 39, 39); 
+}
+
+.lives {
+    margin-right: 35px;
+}
+
+
+button[data-diff="restart"]  {
+
+    text-align: center;
+    font-size: 40px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-right: 35px;
+    
+}
+
+.flags-left {
+    font-size: 50px;
+}
+
+.board-container-and-hints {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    margin-inline: 44.5%;
+}
+.board-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+}
+
+
+.hint{
+    background-color: yellow
+}
+
+.hints {
+    display: flex;
+    justify-content: flex-end;
+    margin-right:400px;
+    margin-top: 45px;
+}
+
+
+.hints button {
+        text-align: center;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 50px;
+    margin-right: 25px;
+    flex-direction: column;
+    width: 5px;
+    height: 20px;
+
+}
+
+
+.hints button span img {
+    width: 70px; /* Adjust the width as needed */
+}
+
+.hints button.clicked {
+    filter: invert(1);
+    cursor: not-allowed;
+}
+
+
+
+.board-container table {
     /* width: auto; */
     border-collapse: collapse;
     margin: 0 auto;
     background-color: rgb(179, 179, 179);
 }
 
-td {
+.board-container td {
     border: 2px solid rgb(233 233 233);
     height: 25px;
     text-align: center;
@@ -92,12 +133,13 @@ td {
     box-shadow: inset -5px -6px 6px 0px #7e7a7a
 }
 
-td.clicked {
-    background-color: rgba(222, 197, 31, 0.669);
+.board-container td.clicked {
+    background-color: rgba(222, 197, 31, 0.669); 
+    cursor: none;
     /* box-shadow: none; */
 }
 
-td:hover {
+.board-container td:hover {
     cursor: pointer;
     background-color: rgba(239, 202, 89, 0.548); 
    
@@ -107,8 +149,73 @@ td:hover {
 
 }
 
+.timer {
+   
+    font-size: 60px;
+      /* WebKit browsers (Chrome, Safari) */
+    
+}
+.tableScore {
+    margin: 0 auto;
+    width: 100%;
+    text-align: left; 
+    margin-inline: auto;
+    font-family: 'Caveat';
+    font-size: 50px;
+}
+
+.tableScore table {
+    width: 30%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid #280404;
+    border-radius: 8px;
+    margin-inline: auto;
+    font-size: 50px;
+}
+
+.tableScore th, .tableScore td {
+    border: 1px solid #280404;
+    padding: 10px;
+    text-align: center;
+}
+
+.tableScore th {
+    background-color: #333;
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+}
+
+.tableScore tr:nth-child(2n+1) td {
+    background-color: #ff8317a5;
+}
+
+.tableScore tr:nth-child(2n) td {
+    background-color: #ff4d17a5;
+}
+
+.tableScore td {
+    font-size: 30px;
+}
+
+.tableScore td:nth-child(2) {
+    width: 60%; /* Adjust the width as needed */
+}
+
+/* Style for the first column (left) */
+.tableScore td:nth-child(1) {
+    width: 20%; /* Adjust the width as needed */
+}
+
+/* Style for the third column (right) */
+.tableScore td:nth-child(3) {
+    width: 20%; /* Adjust the width as needed */
+}
+
 
 .img {
     width: 20px;
-}
+} 
 
