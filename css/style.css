@@ -1,9 +1,8 @@
 body {
- 
+
     text-align: center;
     background-image: url(../img/background.jpg);
     background-size: cover;
-
 }
 
 h1 {
@@ -17,7 +16,7 @@ h1 {
     padding: 10px;
     background-color: transparent;
     color: #d6d6d6;
-    border: 2px solid #d6d6d6;;
+    border: 2px solid #d6d6d6;
     cursor: pointer;
     font-size: 25px;
     margin-right: 10px;
@@ -28,7 +27,7 @@ h1 {
 .diff-level button.clicked {
     background-color: rgb(222, 196, 31);
     color: #ffffff;
-  
+
 
 }
 
@@ -41,8 +40,10 @@ h1 {
     font-family: 'Concert One';
     display: inline-block;
     font-weight: bold;
-     color: #d6d6d6; /* Text color */
-     -webkit-text-stroke: 2px rgb(39, 39, 39); 
+    color: #d6d6d6;
+    /* Text color */
+    -webkit-text-stroke: 2px rgb(39, 39, 39);
+
 }
 
 .lives {
@@ -50,7 +51,7 @@ h1 {
 }
 
 
-button[data-diff="restart"]  {
+button[data-diff="restart"] {
 
     text-align: center;
     font-size: 40px;
@@ -59,7 +60,7 @@ button[data-diff="restart"]  {
     cursor: pointer;
     margin-bottom: 10px;
     margin-right: 35px;
-    
+
 }
 
 .flags-left {
@@ -68,32 +69,103 @@ button[data-diff="restart"]  {
 
 .board-container-and-hints {
     display: flex;
-    align-items: center; 
-    justify-content: space-between; 
-    margin-inline: 44.5%;
+    align-items: center;
+    justify-content: center;
+    /* Center the content horizontally */
+
 }
+
+.hints {
+
+    display: flex;
+    align-items: flex-end;
+    margin-left: 10px;
+}
+
 .board-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-inline: auto;
+    margin-right: 60px;
 }
 
-
-.hint{
+.hint {
     background-color: yellow
 }
 
-.hints {
+.safe-mode and megahint {
     display: flex;
-    justify-content: flex-end;
-    margin-right:400px;
-    margin-top: 45px;
+    flex-direction: column;
+}
+
+.safe-mode {
+    
+    align-items: center;
+    margin-right: 25px;
+    height: 100%;
+    text-align: right;
+    width: 150px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+
+
+
+}
+
+.safe-mode .btn {
+    width: 150px;
+    height: 40px;
+    background-color: rgba(252, 169, 26, 0.931);
+    border: none;
+    cursor: pointer;
+    border-radius: 40%;
+    font-family: 'Concert One';
+    font-size: 25px;
+    color: rgb(222, 219, 203)
+        /* Add any additional styles you need for the button */
+}
+
+.btn.clicked,
+.hints button.clicked {
+    filter: invert(1);
+    cursor: not-allowed;
+}
+
+.megahint {
+
+    
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px;
+    
+
+}
+
+.megahint button {
+    width: 85px;
+    height: 85px;
+    border-radius: 100%;
+    background-color: rgb(251, 203, 11);
+    cursor: pointer;
+}
+
+.megahint button .clicked {
+    filter: invert(1);
+    cursor: not-allowed;
+}
+
+
+.megahint img {
+    width: 70px;
+    /* Adjust the width as needed */
+    height: 70px;
+    /* Adjust the height as needed */
+    border-radius: 50%;
 }
 
 
 .hints button {
-        text-align: center;
+    text-align: center;
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -102,25 +174,24 @@ button[data-diff="restart"]  {
     flex-direction: column;
     width: 5px;
     height: 20px;
-
 }
 
 
 .hints button span img {
-    width: 70px; /* Adjust the width as needed */
+    width: 70px;
 }
 
-.hints button.clicked {
+/* .hints button.clicked {
     filter: invert(1);
     cursor: not-allowed;
-}
+} */
 
 
 
 .board-container table {
     /* width: auto; */
     border-collapse: collapse;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     background-color: rgb(179, 179, 179);
 }
 
@@ -134,15 +205,19 @@ button[data-diff="restart"]  {
 }
 
 .board-container td.clicked {
-    background-color: rgba(222, 197, 31, 0.669); 
+    background-color: rgba(222, 197, 31, 0.669);
     cursor: none;
     /* box-shadow: none; */
 }
 
+.board-container td.safe {
+    background-color: rgba(64, 26, 252, 0.931);
+}
+
 .board-container td:hover {
     cursor: pointer;
-    background-color: rgba(239, 202, 89, 0.548); 
-   
+    background-color: rgba(239, 202, 89, 0.548);
+
 
     transition: background-color 0.5s ease;
     box-shadow: none;
@@ -150,15 +225,30 @@ button[data-diff="restart"]  {
 }
 
 .timer {
-   
-    font-size: 60px;
-      /* WebKit browsers (Chrome, Safari) */
-    
+
+
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 50px;
+    font-family: 'Concert One';
+    font-weight: bold;
+    color: #d6d6d6;
+    -webkit-text-stroke: 2px rgb(39, 39, 39);
 }
+
+h2 {
+    color: rgb(224, 224, 224);
+    font-size: 40px;
+    font-family: 'Rubik Doodle Shadow';
+    margin-bottom: 10px;
+}
+
+
 .tableScore {
     margin: 0 auto;
     width: 100%;
-    text-align: left; 
+    text-align: left;
     margin-inline: auto;
     font-family: 'Caveat';
     font-size: 50px;
@@ -174,7 +264,8 @@ button[data-diff="restart"]  {
     font-size: 50px;
 }
 
-.tableScore th, .tableScore td {
+.tableScore th,
+.tableScore td {
     border: 1px solid #280404;
     padding: 10px;
     text-align: center;
@@ -201,21 +292,27 @@ button[data-diff="restart"]  {
 }
 
 .tableScore td:nth-child(2) {
-    width: 60%; /* Adjust the width as needed */
+    width: 60%;
+    /* Adjust the width as needed */
 }
 
 /* Style for the first column (left) */
 .tableScore td:nth-child(1) {
-    width: 20%; /* Adjust the width as needed */
+    width: 20%;
+    /* Adjust the width as needed */
 }
 
 /* Style for the third column (right) */
 .tableScore td:nth-child(3) {
-    width: 20%; /* Adjust the width as needed */
+    width: 20%;
+    /* Adjust the width as needed */
 }
 
 
 .img {
     width: 20px;
-} 
+}
 
+.hide {
+    display: none;
+}

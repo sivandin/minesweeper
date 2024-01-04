@@ -11,7 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Tangerine:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Tangerine:wght@700&display=swap"
+        rel="stylesheet">
     <title>Document</title>
 </head>
 
@@ -30,6 +31,16 @@
         <span><img width="40" src="img/flag.png" /></span>
     </div>
     <div class="board-container-and-hints">
+        <div class="safe-mode and megahint"> 
+            <div class="safe-mode ">
+                <button class="btn hide" onclick="onSafeMode(this)">SAFE-MODE</button>
+            </div>
+            <div class="megahint">
+                <button onclick="onMegaHintClick(this)">
+                    <span><img width="40" src="img/detective.png" /></span>
+                </button>
+            </div>
+        </div>
         <div class="board-container"></div>
         <div class="hints">
             <button class="hints" onclick="onHintClick(this)">
@@ -43,11 +54,12 @@
             </button>
         </div>
     </div>
-    <div class="board-container"></div>
-    <div class="game-status">
-        <span class="timer">0</span>
+    <div class="timer">
+        <span>0</span>
     </div>
-    <div class="tableScore"></div>
+    <h2>Leader Board</h2>
+    <div class="tableScore">
+    </div>
     <script src="js/game.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/timeAndDiff.js"></script>

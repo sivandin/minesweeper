@@ -3,6 +3,7 @@ var gPlayer = {
     name: 'Player', // Default player name
     score: 0,
 }
+var gStoredTable = localStorage.getItem('scoreTable')
 
 
 function buildTable() {
@@ -30,18 +31,22 @@ function renderTable(table) {
 
 
 function CheckScore(secs) {
+    
     gPlayer.score = secs
-    var playerRow = [gTable.length + 1, gPlayer.name, gPlayer.score];
 
     for (var i = 0; i < gTable.length; i++) {
-        if (secs >= gTable[i][2]) {
+        var playerRow = [i + 1, gPlayer.name, gPlayer.score]
+        if (secs <= gTable[i][2]) {
             gTable.splice(i, 0, playerRow)
-            gTable.pop()
-            for (var i = i+1; i<gTable.length; i++) {
-                gTable[i][0] = i+1
+            if (gTable.length > 10) gTable.pop()
+            
+            for (var j = i+1; j<gTable.length; j++) {
+                gTable[j][0] = j+1
             }
+           
+            saveTable()
             renderTable(gTable)
-            saveTable() // Save the updated table to local storage
+            // Save the updated table to local storage
             return
         }
     }
