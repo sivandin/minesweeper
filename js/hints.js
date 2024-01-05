@@ -3,7 +3,7 @@
 function onHintClick(elBtn) {
 
     if (gGame.hints > 0 && !elBtn.classList.contains('clicked')) {
-        toggleClass(elBtn, 'clicked', 'add')
+        elBtn.classList.add('clicked')
         gIsHintClicked = true
     }
 }
@@ -12,8 +12,8 @@ function toggleHintsClicked(action) {
     var elHintBtns = document.querySelectorAll('.hints button')
 
     for (var k = 0; k < elHintBtns.length; k++) {
-        if (action === 'add') toggleClass(elHintBtns[k], 'clicked', 'add')
-        else if (action === 'remove') toggleClass(elHintBtns[k], 'clicked', 'remove')
+        if (action === 'add') elHintBtns[k].classList.add('clicked') 
+        else if (action === 'remove') elHintBtns[k].classList.remove('clicked') 
     }
 }
 
@@ -28,7 +28,13 @@ function giveSingleHint(cellPos) {
         var elCell = document.querySelector('.' + getClassName(cellPos))
         elCell.classList.add('hint')
 
-        setTimeout(() => removeHint(cellPos), 1000)
+        if (gGame.megaHint === true) {
+    
+            setTimeout(() => removeHint(cellPos), 2000)
+            return
+        } else {
+        } setTimeout(() => removeHint(cellPos), 1000)
+
     }
 }
 
@@ -55,7 +61,7 @@ function onSafeMode(elBtn) {
     elBtn.classList.add('clicked')
     safeClickHint()
     gGame.safeModeCount--
-    if (gGame.safeModeCount === 0) {
+    if (gGame.safeModeCount <= 0) {
         elBtn.classList.add('hide')
         return
     }
@@ -93,32 +99,41 @@ function safeClickHint() {
 
 
 
-// function onMegaHintClick(elBtn) {
-//     debugger
-//     elBtn.classList.contains('clicked')
-//     toggleClass(elBtn, 'clicked', 'add')
-//     gIsMega = true
-// }
+function onMegaHintClick(elBtn) {
+
+    if (!elBtn.classList.contains('clicked')) {
+        elBtn.classList.add('clicked')
+        gGame.megaHint = true
+
+    }
+}
 
 
 
-// function calcArr (firstPos, secondPos) {
-//     var firstRow = firstPos.i > secondPos.i ? firstPos.i : secondPos.i
-//     var lastRow = firstPos.i > secondPos.i ? firstPos.i : secondPos.i
-//     var firstCol = firstPos.j > secondPos.j ? firstPos.j : secondPos.j
-//     var lastCol = firstPos.j > secondPos.j ? fistPos.j : secondPos.j
+function createCellsArr(firstPos, secondPos) {
+    var firstRow = firstPos.i < secondPos.i ? firstPos.i : secondPos.i
+    var lastRow = firstPos.i > secondPos.i ? firstPos.i : secondPos.i
+    var firstCol = firstPos.j < secondPos.j ? firstPos.j : secondPos.j
+    var lastCol = firstPos.j > secondPos.j ? firstPos.j : secondPos.j
 
-//     var rowCount = lastRow - firstRow
-//     var colCount = lastCol - firstCol
-
-//     for (var i = firstRow; i < rowCount; i++) {
-//         for (var j = firstCol; j < colCount; j++) {
-//             currCell = gBoard[i][j]
-//             gMegaHint.cellsArr.push(currCell)
-//         }
-
-//     }
-// }
+    var cellsArr = []
 
 
+    for (var i = firstRow; i <= lastRow; i++) {
+        for (var j = firstCol; j <= lastCol; j++) {
+            var currCellPos = { i, j }
+            toggleClass({ i, j }, 'cellMega', 'add')
+             removeTimeOutBackground({i,j})
+            cellsArr.push(currCellPos)
+        }
 
+    }
+    return cellsArr
+}
+
+
+function removeTimeOutBackground({i,j}) {
+    setTimeout(function() {
+        toggleClass({i,j}, 'cellMega', 'remove');
+    }, 1000);
+}

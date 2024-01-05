@@ -5,13 +5,12 @@ const FLAG_IMG = '<img src="img/flag.png" class="img">'
 const MINE_IMG = '<img src="img/mine.png" class="img">'
 
 var gIsHintClicked = false
-var gIsMega=false
+var gIsMega = false
 
 var gMegaHint = {
-    clicked: false,
+    clicks: 0,
     firstCellPos: { i: -1, j: -1 },
     secondCellPos: { i: -1, j: -1 },
-    cellsArr: []
 }
 
 var gBoard = []  //A Matrix containing cell objects:Each cell: 
@@ -40,6 +39,7 @@ var gGame = {
     hints: 3,
     secsPassed: 0,
     safeModeCount: 3,
+    megaHint: false
 }
 
 
@@ -53,7 +53,8 @@ function onInit() {
     gGame.leftClickCount = 0
     gGame.hints = 3
     gGame.safeModeCount = 3
-
+    gGame.megaHint = false
+    gMegaHint.clicks = 0
     // Clear timer
     endTimer()
 
@@ -66,10 +67,9 @@ function onInit() {
     renderLives()
 
 
-    if (gStoredTable) gTable = JSON.parse(gStoredTable)
-    else {
-        buildTable()
-        saveTable() // Save the initial table to local storage
+    if (!gStoredTable) {
+        buildTable();
+        saveTable(); // Save the initial table to local storage
     }
     renderTable(gTable)
 
@@ -179,16 +179,14 @@ function handleLeftClick(i, j, elCell) {
     if (gBoard[i][j].isShown) return
 
     gGame.leftClickCount++
-    
-debugger
-    var elSafeBtn = document.querySelector('.safe-mode .btn')
-    elSafeBtn.classList.remove('hide')
-
 
     if (gGame.leftClickCount === 1) {
         startTimer()
         initMines()
         toggleHintsClicked('remove')
+
+        var elSafeBtn = document.querySelector('.safe-mode .btn')
+        elSafeBtn.classList.remove('hide')
     }
 
     if (gIsHintClicked) {
@@ -199,17 +197,29 @@ debugger
         gIsHintClicked = false
         return
     }
-
-    // if (gIsMega) {
-    //     gMegaHint.clicked++;
-    //     if (gMegaHint.clicked === 1) {
-    //         gMegaHint.firstCellPos = { i, j }
-    //     } else if (gMegaHint.clicked === 2) {
-    //         gMegaHint.secondCellPos = { i, j }
-    //         calcArr(gMegaHint.firstCellPos, gMegaHint.secondCellPos)
-    //     }
-    // }
     
+    if (gGame.megaHint) {
+
+        gMegaHint.clicks++;
+
+        if (gMegaHint.clicks === 1) {
+            gMegaHint.firstCellPos = { i, j }
+            toggleClass({ i, j }, 'cellMega', 'add')
+            return
+
+        } else if (gMegaHint.clicks === 2) {
+            gMegaHint.secondCellPos = { i, j }
+            var cellsArr = createCellsArr(gMegaHint.firstCellPos, gMegaHint.secondCellPos);
+
+            setTimeout(function () {
+                giveHints(cellsArr);
+                gGame.megaHint = false;
+            }, 1050);
+
+            return
+        }
+    }
+
 
     defineShownCellSets({ i, j })
 
@@ -223,8 +233,7 @@ debugger
         elBtn.innerText = '😊'
     }, 300)
 
-
-    toggleClass(elCell, 'clicked', 'add')
+    elCell.classList.add('clicked')
 
     if (gBoard[i][j].isMine) return
 
@@ -241,17 +250,20 @@ debugger
 
 
 function handleRightClick(i, j, elCell) {
+    if (!gBoard[i][j].isShown) {
+        toggleRightClick(i, j)
+        if (gBoard[i][j].isMarked) {
+            gGame.markedCount--
+            renderCell({ i, j }, FLAG_IMG)
+        }
+        else {
+            gGame.markedCount++
+            renderCell({ i, j }, EMPTY)
+        }
+        onCellMarked()
 
-    toggleRightClick(i, j)
-    if (gBoard[i][j].isMarked) {
-        gGame.markedCount--
-        renderCell({ i, j }, FLAG_IMG)
     }
-    else {
-        gGame.markedCount++
-        renderCell({ i, j }, EMPTY)
-    }
-    onCellMarked()
+
 
 }
 

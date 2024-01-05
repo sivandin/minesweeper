@@ -2,7 +2,9 @@ body {
 
     text-align: center;
     background-image: url(../img/background.jpg);
-    background-size: cover;
+    background-size: contain;
+
+   
 }
 
 h1 {
@@ -89,9 +91,7 @@ button[data-diff="restart"] {
     margin-right: 60px;
 }
 
-.hint {
-    background-color: yellow
-}
+
 
 .safe-mode and megahint {
     display: flex;
@@ -149,11 +149,14 @@ button[data-diff="restart"] {
     cursor: pointer;
 }
 
-.megahint button .clicked {
-    filter: invert(1);
+.megahint button.clicked {
+    
     cursor: not-allowed;
 }
-
+.megahint button.clicked img {
+    
+   display: none;
+}
 
 .megahint img {
     width: 70px;
@@ -206,13 +209,23 @@ button[data-diff="restart"] {
 
 .board-container td.clicked {
     background-color: rgba(222, 197, 31, 0.669);
-    cursor: none;
     /* box-shadow: none; */
 }
 
 .board-container td.safe {
     background-color: rgba(64, 26, 252, 0.931);
 }
+
+.board-container td.cellMega {
+    background-color: rgba(98, 252, 26, 0.931);
+    cursor: none !important;
+}
+
+.board-container td.hint {
+    background-color: yellow;
+    cursor: none !important;
+}
+
 
 .board-container td:hover {
     cursor: pointer;
@@ -313,6 +326,3 @@ h2 {
     width: 20px;
 }
 
-.hide {
-    display: none;
-}

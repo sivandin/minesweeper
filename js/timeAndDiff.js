@@ -31,6 +31,7 @@ function updateTime() {
 
 function chooseDiffLevel(elBtn) {
 
+    updateBoardOnGameOver()
     var diffLevel = elBtn.getAttribute('data-diff')
 
     if (elBtn !== document.querySelector('[data-diff="restart"]')) {

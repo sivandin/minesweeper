@@ -1,9 +1,12 @@
-var gTable = []
+
 var gPlayer = {
     name: 'Player', // Default player name
     score: 0,
 }
+
 var gStoredTable = localStorage.getItem('scoreTable')
+var gTable = gStoredTable ? JSON.parse(gStoredTable) : []
+
 
 
 function buildTable() {
@@ -19,35 +22,40 @@ function saveTable() {
 
 function renderTable(table) {
     const elTable = document.querySelector('.tableScore')
-    var strHTML = '<table>';
+    var strHTML = '<table><tr><th>Position</th><th>Name</th><th>Score</th></tr>';
+
     for (var i = 0; i < table.length; i++) {
-        strHTML += `<tr><td data-position="${table[i][0]}" data-name="${table[i][1]}"
-         data-score="${table[i][2]}">${table[i][0]}</td>
-         <td>${table[i][1]}</td><td>${table[i][2]}</td></tr>`
+        strHTML += `<tr><td data-position="${table[i][0]}" data-name="${table[i][1]}" data-score="${table[i][2]}">${table[i][0]}</td><td>${table[i][1]}</td><td>${table[i][2]}</td></tr>`;
     }
+
     strHTML += '</table>';
     elTable.innerHTML = strHTML;
 }
 
 
-function CheckScore(secs) {
-    
-    gPlayer.score = secs
 
-    for (var i = 0; i < gTable.length; i++) {
-        var playerRow = [i + 1, gPlayer.name, gPlayer.score]
-        if (secs <= gTable[i][2]) {
-            gTable.splice(i, 0, playerRow)
-            if (gTable.length > 10) gTable.pop()
-            
-            for (var j = i+1; j<gTable.length; j++) {
-                gTable[j][0] = j+1
-            }
-           
-            saveTable()
-            renderTable(gTable)
-            // Save the updated table to local storage
-            return
+    function CheckScore(secs) {
+        debugger;
+    
+        gPlayer.score = secs
+    
+        // Add the player to the leaderboard
+        gTable.push([0, gPlayer.name, gPlayer.score])
+    
+        // Sort the leaderboard in descending order based on the player's scores
+        gTable.sort(function (a, b) {
+            return a[2] - b[2];
+
+        })
+    
+        // Keep only the top 10 rows
+        gTable = gTable.slice(0, 10);
+    
+        // Update positions
+        for (var j = 0; j < gTable.length; j++) {
+            gTable[j][0] = j + 1;
         }
+    
+        saveTable();
+        renderTable(gTable);
     }
-}

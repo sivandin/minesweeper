@@ -40,9 +40,6 @@ function changeBackgroundColor(location, color) {
     elCell.style.backgroundColor = color
 }
 
-function toggleClass(elCell, className, action) {
-    elCell.classList[action](className)
-}
 
 function getClassName(position) {
     const cellClass = `cell-${position.i}-${position.j}`
@@ -114,13 +111,16 @@ function updateBoardOnGameOver() {
     endTimer()
     gPreviousLevel.DIFF = gLevel.DIFF
 
-    var elSafeBtn= document.querySelector('.safe-mode .btn')
+    var elSafeBtn = document.querySelector('.safe-mode .btn')
     elSafeBtn.classList.add('hide')
+
+    var elMegaHintBtn = document.querySelector('.megahint .mega')
+    elMegaHintBtn.classList.remove('clicked')
 }
 
 function negsLoop(pos) {
     var gNegs = []
-    
+
     for (var i = pos.i - 1; i <= pos.i + 1; i++) {
         if (i < 0 || i >= gBoard.length) continue
 
@@ -135,12 +135,20 @@ function negsLoop(pos) {
     return gNegs;
 }
 
-function handleAction( actionFunc, argument, countProp){
-    
-        if (gGame[countProp] > 0) {
-            actionFunc(argument)
-            return gGame[countProp]--
-        }
+function handleAction(actionFunc, argument, countProp) {
+
+    if (gGame[countProp] > 0) {
+        actionFunc(argument)
+        return gGame[countProp]--
     }
+}
+
+function toggleClass(cellPos, className, action) {
+    const cellSelector = '.' + getClassName(cellPos);
+    const elCell = document.querySelector(cellSelector);
+
+        elCell.classList[action](className)
+    
+}
 
 
