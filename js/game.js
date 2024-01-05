@@ -19,7 +19,7 @@ var gLevel = {
     SIZE: 4,
     MINES: 2,
     LIVES: 1,
-    DIFF: 'easy'
+    DIFF: 'easy',
 
 }
 
@@ -28,6 +28,11 @@ var gPreviousLevel = {
     MINES: 2,
     LIVES: 1,
     DIFF: 'easy'
+}
+
+var gPlayer = {
+    name: 'Player', // Default player name
+    score: Infinity,
 }
 
 
@@ -67,10 +72,8 @@ function onInit() {
     renderLives()
 
 
-    if (!gStoredTable) {
-        buildTable();
-        saveTable(); // Save the initial table to local storage
-    }
+    // if (!gTable.length) buildTable()
+    stroeTableScoreRes()
     renderTable(gTable)
 
 
@@ -134,6 +137,8 @@ function placeMine() {
     }
 }
 
+
+
 function isRandomMine() {
     var rowIdx = getRandomInt(0, gLevel.SIZE)
     var colIdx = getRandomInt(0, gLevel.SIZE)
@@ -181,8 +186,16 @@ function handleLeftClick(i, j, elCell) {
     gGame.leftClickCount++
 
     if (gGame.leftClickCount === 1) {
+       
         startTimer()
         initMines()
+        // while (gBoard[i][j].isMine)  { debugger
+        //     gBoard=[]
+        //     buildBoard()
+        //     renderBoard(gBoard, '.board-container')
+        //     initMines()
+        // }
+        
         toggleHintsClicked('remove')
 
         var elSafeBtn = document.querySelector('.safe-mode .btn')
@@ -197,7 +210,7 @@ function handleLeftClick(i, j, elCell) {
         gIsHintClicked = false
         return
     }
-    
+
     if (gGame.megaHint) {
 
         gMegaHint.clicks++;
@@ -333,5 +346,16 @@ function gameOver(pos, elCell) {
     updateBoardOnGameOver()
 }
 
+function stroeTableScoreRes() {
+    for (var diffLevel in gTables) {
+        var storedTable = localStorage.getItem(diffLevel + 'Table')
+        if (storedTable) {
+            gTables[diffLevel] = JSON.parse(storedTable)
+        } else {
+            gTables[diffLevel] = buildTable()
+        }
+    }
+
+}
 
 

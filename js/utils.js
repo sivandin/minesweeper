@@ -151,4 +151,9 @@ function toggleClass(cellPos, className, action) {
     
 }
 
+function getRandomName() {
+    const names = ['Alice', 'Bob', 'Charlie', 'David', 'Emma', 'Frank', 'Grace', 'Henry', 'Ivy', 'Jack'];
+    const randomIndex = Math.floor(Math.random() * names.length);
+    return names[randomIndex];
+}
 

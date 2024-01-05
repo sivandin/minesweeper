@@ -43,28 +43,30 @@ function chooseDiffLevel(elBtn) {
 
     switch (diffLevel) {
         case 'easy':
-            gLevel.SIZE = 4;
-            gLevel.MINES = 2;
-            gLevel.LIVES = 1;
+            gLevel.SIZE = 4
+            gLevel.MINES = 2
+            gLevel.LIVES = 1
             gLevel.DIFF = 'easy'
-            break;
+            gTable = gTables.easy
+            break
         case 'medium':
-            gLevel.SIZE = 8;
-            gLevel.MINES = 14;
-            gLevel.LIVES = 3;
+            gLevel.SIZE = 8
+            gLevel.MINES = 14
+            gLevel.LIVES = 3
             gLevel.DIFF = 'medium'
-
-            break;
+            gTable = gTables.medium
+            break
         case 'hard':
-            gLevel.SIZE = 12;
-            gLevel.MINES = 32;
-            gLevel.LIVES = 3;
+            gLevel.SIZE = 12
+            gLevel.MINES = 32
+            gLevel.LIVES = 3
             gLevel.DIFF = 'hard'
-            break;
+            gTable = gTables.hard
+            break
         default:
             // Set gLevel to the previous level
-            gLevel = gPreviousLevel;
-            break;
+            gLevel = gPreviousLevel
+            break
 
     }
 
