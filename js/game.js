@@ -72,8 +72,7 @@ function onInit() {
     renderLives()
 
 
-    // if (!gTable.length) buildTable()
-    stroeTableScoreRes()
+    if (!gTable.length) buildTable()
     renderTable(gTable)
 
 

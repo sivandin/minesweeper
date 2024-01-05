@@ -1,6 +1,6 @@
 
 
-// Step 2: Default Table
+
 var easyT= buildTable()
 var mediumT= buildTable()
 var hardT= buildTable()
@@ -35,9 +35,6 @@ function renderTable(table) {
     elTable.innerHTML = strHTML;
 }
 
-function saveTable(diffLevel) {
-    localStorage.setItem(diffLevel + 'Table', JSON.stringify(gTables[diffLevel]));
-}
 
     function CheckScore(secs) {
         var currTable= gTables[gLevel.DIFF]
@@ -66,7 +63,6 @@ function saveTable(diffLevel) {
 
             // Render the updated leaderboard
             renderTable(currTable);
-            saveTable(gLevel.DIFF)
             return;
         }
      }
