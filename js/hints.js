@@ -74,6 +74,7 @@ function safeClickHint() {
     while (true) {
         var randomCellObj = isRandomMine()
         var randomCell = randomCellObj.cell
+        
 
         if (!randomCell.isShown && !randomCell.isMine) {
             break
