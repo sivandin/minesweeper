@@ -57,5 +57,3 @@ function updateTableScore(secs) {
         }
     }
 }
-
-

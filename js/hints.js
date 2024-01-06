@@ -97,7 +97,6 @@ function safeClickHint() {
 }
 
 
-
 function onMegaHintClick(elBtn) {
 
     if (!elBtn.classList.contains('clicked')) {
@@ -106,7 +105,6 @@ function onMegaHintClick(elBtn) {
 
     }
 }
-
 
 
 function createCellsArr(firstPos, secondPos) {

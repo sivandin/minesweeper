@@ -6,6 +6,7 @@ const MINE_IMG = '<img src="img/mine.png" class="img">'
 
 var gIsHintClicked = false
 var gIsMega = false
+var gFirstClick = true
 
 var gMegaHint = {
     clicks: 0,
@@ -110,10 +111,10 @@ function buildBoard() {
     }
 }
 
-function initMines() {
+function initMines(pos) {
 
     for (var i = 0; i < gLevel.MINES; i++) {
-        placeMine()
+        placeMine(pos)
     }
 
     for (var i = 0; i < gBoard.length; i++) {
@@ -124,14 +125,15 @@ function initMines() {
     }
 }
 
-function placeMine() {
+function placeMine(pos) {
     var minePlaced = false
 
     while (!minePlaced) {
         var randomCellObj = isRandomMine()
         var randomCell = randomCellObj.cell
 
-        if (!randomCell.isMine && !randomCell.isShown) {
+        if (!randomCell.isMine && randomCellObj.rowIdx !== pos.i &&
+            randomCellObj.colIdx !== pos.j) {
             randomCell.isMine = true
             minePlaced = true
         }
@@ -186,18 +188,10 @@ function handleLeftClick(i, j, elCell) {
     gGame.leftClickCount++
 
     if (gGame.leftClickCount === 1) {
-       
-        startTimer()
-        initMines()
 
-        while (gBoard[i][j].isMine)  { 
-            gBoard=[]
-            buildBoard()
-            renderBoard(gBoard, '.board-container')
-            initMines()
-            console.log(gBoard)
-        }
-        
+        startTimer()
+        initMines({ i, j })
+
         toggleHintsClicked('remove')
 
         var elSafeBtn = document.querySelector('.safe-mode .btn')
@@ -239,16 +233,16 @@ function handleLeftClick(i, j, elCell) {
     defineShownCellSets({ i, j })
 
     if (gBoard[i][j].isMine) {
-            gLevel.LIVES--
-            renderLives()
-            elCell.innerHTML = MINE_IMG
+        gLevel.LIVES--
+        renderLives()
+        elCell.innerHTML = MINE_IMG
     }
 
     else if (gBoard[i][j].minesAroundCount === 0) {
 
-        elCell.innerText = EMPTY 
+        elCell.innerText = EMPTY
         revealNegs({ i, j })
-        
+
     } else {
         elCell.innerText = gBoard[i][j].minesAroundCount
     }
@@ -320,12 +314,12 @@ function checkGameOver(pos, elCell) {
     }
 
     if (gBoard[pos.i][pos.j].isMine && gLevel.LIVES === 0) {
-            gameOver(pos, elCell)
-            return true
-        }
-        
-        return false
+        gameOver(pos, elCell)
+        return true
     }
+
+    return false
+}
 
 
 function gameOver(pos, elCell) {
@@ -338,7 +332,7 @@ function gameOver(pos, elCell) {
         elCell.innerHTML = MINE_IMG
     }
 
-    else  elBtn.innerText = '🤩'
+    else elBtn.innerText = '🤩'
 
     updateBoardOnGameOver()
 }
