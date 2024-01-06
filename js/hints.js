@@ -21,7 +21,6 @@ function toggleHintsClicked(action) {
 function giveSingleHint(cellPos) {
     var cell = gBoard[cellPos.i][cellPos.j]
 
-    // Ensure the cell is not already shown
     if (!cell.isShown) {
         revealCell(cellPos)
 

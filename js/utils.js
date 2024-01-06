@@ -52,7 +52,7 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
 }
 
-function onCellMarked() {
+function updateFlagsCount() {
     var elFlagsLeft = document.querySelector('.flags-left')
     elFlagsLeft.innerText = `${gGame.markedCount}`
 
@@ -76,7 +76,6 @@ function toggleRightClick(i, j) {
 
 function revealCell(pos) {
     var value = EMPTY
-
     const currCell = gBoard[pos.i][pos.j]
 
     if (currCell.isMine) value = MINE_IMG
@@ -97,26 +96,7 @@ function defineShownCellSets(pos) {
 }
 
 
-function updateBoardOnGameOver() {
 
-    for (var i = 0; i < gBoard.length; i++) {
-        for (var j = 0; j < gBoard[i].length; j++) {
-            if (gBoard[i][j].isMine) renderCell({ i, j }, MINE_IMG)
-            else revealCell({ i, j });
-
-        }
-    }
-
-    gGame.isOn = false
-    endTimer()
-    gPreviousLevel.DIFF = gLevel.DIFF
-
-    var elSafeBtn = document.querySelector('.safe-mode .btn')
-    elSafeBtn.classList.add('hide')
-
-    var elMegaHintBtn = document.querySelector('.megahint .mega')
-    elMegaHintBtn.classList.remove('clicked')
-}
 
 function negsLoop(pos) {
     var gNegs = []

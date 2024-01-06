@@ -1,4 +1,5 @@
 'use strict'
+
 var gStartTime
 var gTimerInterval
 
@@ -19,7 +20,6 @@ function endTimer() {
 }
 
 function updateTime() {
-    //debugger
     var currTime = Date.now()
     var elapsedTime = currTime - gStartTime
     var seconds = Math.floor(elapsedTime / 1000)
@@ -29,10 +29,10 @@ function updateTime() {
     elTimer.innerHTML = seconds
 }
 
-function chooseDiffLevel(elBtn) {
+function chooseLevel(elBtn) {
 
     updateBoardOnGameOver()
-    var diffLevel = elBtn.getAttribute('data-diff')
+    var level = elBtn.getAttribute('data-diff')
 
     if (elBtn !== document.querySelector('[data-diff="restart"]')) {
         if (previuosSelectnBtn) previuosSelectnBtn.classList.remove('clicked')
@@ -41,7 +41,7 @@ function chooseDiffLevel(elBtn) {
     }
 
 
-    switch (diffLevel) {
+    switch (level) {
         case 'easy':
             gLevel.SIZE = 4
             gLevel.MINES = 2

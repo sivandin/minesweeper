@@ -321,6 +321,10 @@ h2 {
     /* Adjust the width as needed */
 }
 
+.hide {
+display: none;
+}
+
 
 .img {
     width: 20px;

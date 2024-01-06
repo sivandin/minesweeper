@@ -20,13 +20,13 @@
     <h1>Mine Sweeper</h1>
     <div class="img-container"></div>
     <div class="diff-level">
-        <button data-diff="easy" class="clicked" onclick="chooseDiffLevel(this)">Easy</button>
-        <button data-diff="medium" onclick="chooseDiffLevel(this)">Medium</button>
-        <button data-diff="hard" onclick="chooseDiffLevel(this)">Hard</button>
+        <button data-diff="easy" class="clicked" onclick="chooseLevel(this)">Easy</button>
+        <button data-diff="medium" onclick="chooseLevel(this)">Medium</button>
+        <button data-diff="hard" onclick="chooseLevel(this)">Hard</button>
     </div>
     <div class="game-status">
         <span class="lives"></span>
-        <button data-diff="restart" onclick="chooseDiffLevel(this); onInit()">&#128522</button>
+        <button data-diff="restart" onclick="chooseLevel(this); onInit()">&#128522</button>
         <span class="flags-left"></span>
         <span><img width="40" src="img/flag.png" /></span>
     </div>

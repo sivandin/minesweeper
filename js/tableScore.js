@@ -1,23 +1,23 @@
+'use strict'
 
 
-
-var easyT= buildTable()
-var mediumT= buildTable()
-var hardT= buildTable()
+var easyT = buildTable()
+var mediumT = buildTable()
+var hardT = buildTable()
 
 var gTables = {
     easy: easyT,
     medium: mediumT,
     hard: hardT
 }
-var gTable=gTables.easy
+var gTable = gTables.easy
 
 
 function buildTable() {
-    var table=[]
+    var table = []
     for (var i = 0; i < 10; i++) {
 
-        table.push([i + 1, getRandomName(), i*10]) //player (placeObBoard, name, randomScore)
+        table.push([i + 1, getRandomName(), i * 20]) //player (placeObBoard, name, randomScore)
     }
     return table
 }
@@ -36,37 +36,26 @@ function renderTable(table) {
 }
 
 
-    function CheckScore(secs) {
-        var currTable= gTables[gLevel.DIFF]
-       
-   
-        gPlayer.score = secs
-    debugger
+function updateTableScore(secs) {
+    var currTable = gTables[gLevel.DIFF]
 
-     // Iterate through the leaderboard
-     for (var i = 0; i < currTable.length; i++) {
-        // Check if the player's score is higher or equal to the current row
+    gPlayer.score = secs
+
+    for (var i = 0; i < currTable.length; i++) {
         if (secs <= currTable[i][2]) {
-            // Insert the player's information at this position
-          
-            currTable.splice(i, 0, [i+1, gPlayer.name, gPlayer.score])
-            console.log(currTable, ' Table ofter splicing')
 
-            // Keep only the top 10 rows
+            currTable.splice(i, 0, [i + 1, gPlayer.name, gPlayer.score])
             currTable = currTable.slice(0, 10)
-            console.log(currTable, ' Table ofter slicing')
 
             // Update positions
             for (var j = 0; j < currTable.length; j++) {
                 currTable[j][0] = j + 1
             }
 
-            // Render the updated leaderboard
-            renderTable(currTable);
-            return;
+            renderTable(currTable)
+            return
         }
-     }
     }
+}
 
-   
-    
+
